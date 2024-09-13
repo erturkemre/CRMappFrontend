@@ -35,12 +35,12 @@ const Navbar = () => {
   return (
     <div className="flex">
       <div
-        className={`fixed inset-y-0 left-0 bg-sky-900 p-5 transition-transform transform ${
-          isOpen ? "translate-x-0" : "-translate-x-[calc(100%-10px)]"
-        } w-64 md:relative md:translate-x-0 z-50 flex-shrink-0`}
+        className={`fixed inset-y-0 left-0 bg-sky-900 ml-2rem  sm:ml-0 p-5 transition-transform transform ${
+          isOpen ? "translate-x-0" : "-translate-x-[calc(100%-35px)]"
+        } w-16rem md:relative md:translate-x-0 z-50 flex-shrink-0`}
         style={{ width: isOpen ? "16rem" : "auto" }}
       >
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full ">
           <div className="flex flex-row justify-between items-center mb-4">
             {isOpen ? (
               <div className="text-white text-lg font-bold">CRM Dashboard</div>

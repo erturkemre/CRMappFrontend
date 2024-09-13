@@ -15,8 +15,8 @@ const Footer = () => {
     e.preventDefault();
   };
   return (
-    <div className="flex flex-col bg-[#FAFAFA]">
-      <div className="flex flex-col sm:flex-row sm:justify-between p-5 sm:px-40">
+    <div className="flex flex-col bg-[#FAFAFA]  w-full ">
+      <div className="flex flex-col sm:flex-row sm:justify-between p-5 sm:min-w-full sm:px-40">
         <NavLink to="/" className="text-2xl font-bold text-black">
           CRM Dashboard
         </NavLink>
