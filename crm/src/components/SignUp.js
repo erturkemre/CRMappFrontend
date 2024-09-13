@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-//import { userActionsCreator } from "../store/actions/userActions";
-import { ToastContainer, toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
+import { ToastContainer} from "react-toastify";
+import { toast } from 'react-toastify';
+
+import { registerUserAction } from "../store/actions/userAction";
 
 const Signup = () => {
   const {
@@ -16,18 +17,32 @@ const Signup = () => {
     mode: "all",
   });
 
-  //const dispatch = useDispatch();
-  //const history = useHistory();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const formSubmit = (data) => {
-    console.log(data);
-    //dispatch(userActionsCreator(data));
-    
+  const formSubmit = async (data) => {
+    try {
+      console.log(data);
+      await dispatch(registerUserAction(data));
+      toast.success("Kayıt başarılı. Giriş yapabilirsiniz.");
+      navigate("/login");
+    } catch (error) {
+      toast.error(
+        "Kayıt sırasında bir hata oluştu. Lütfen tekrar deneyin.",
+        
+      );
+    }
   };
 
   return (
     <div className="flex flex-col items-center gap-10">
       <div className="flex flex-col items-center gap-4">
+      <ToastContainer
+          position="top-right"
+          autoClose={4000}
+          hideProgressBar={false}
+          closeOnClick
+        />
         <h3 className="font-bold text-4xl text-[#252B42]">Sign Up</h3>
         <p className="text-[#737373] text-base">
           Enter your details to create a new account
@@ -48,7 +63,9 @@ const Signup = () => {
               },
             })}
           />
-          {errors.username && <p className="text-red-500">{errors.username.message}</p>}
+          {errors.username && (
+            <p className="text-red-500">{errors.username.message}</p>
+          )}
         </div>
         <div className="flex flex-col items-start w-[22rem] h-24">
           <label className="font-bold text-md text-[#252B42]">Email</label>
@@ -64,7 +81,9 @@ const Signup = () => {
               },
             })}
           />
-          {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
         <div className="flex flex-col items-start w-[22rem] h-24">
           <label className="font-bold text-md text-[#252B42]">Password</label>
@@ -80,7 +99,9 @@ const Signup = () => {
               },
             })}
           />
-          {errors.password && <p className="text-red-500">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
         </div>
         <div className="flex w-[22rem] h-20">
           <button
@@ -99,7 +120,7 @@ const Signup = () => {
             </NavLink>
           </p>
         </div>
-        <ToastContainer />
+       
       </form>
     </div>
   );

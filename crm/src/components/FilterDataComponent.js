@@ -15,6 +15,20 @@ const FilterDataComponent = ({ onFilter }) => {
       [name]: value
     });
   };
+  const handleReset = () => {
+    setFilters({
+      firstName: "",
+      lastName: "",
+      email: "",
+      region: ""
+    });
+    onFilter({
+      firstName: "",
+      lastName: "",
+      email: "",
+      region: ""
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +85,13 @@ const FilterDataComponent = ({ onFilter }) => {
         >
           Apply Filters
         </button>
+        <button
+            type="button"
+            onClick={handleReset}
+            className="bg-gray-500 text-white ml-5 py-2 px-4 rounded"
+          >
+            Reset Filters
+          </button>
       </form>
     </div>
   );

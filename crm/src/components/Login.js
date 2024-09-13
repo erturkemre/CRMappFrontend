@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import { loginUserAction } from "../store/actions/userAction";
 
 const Login = () => {
     const {
@@ -13,11 +15,19 @@ const Login = () => {
         mode: "all",
       });
 
+      const dispatch = useDispatch();
+      const navigate = useNavigate();
 
-        const formSubmit = (data) => {
-
-            console.log(data);
-        };
+      const formSubmit = async (data) => {
+          try {
+              console.log(data);
+              await dispatch(loginUserAction(data));
+              toast.success('Login successful!');
+              navigate('/'); 
+          } catch (error) {
+              toast.error('Login failed, please check your credentials.');
+          }
+      };
     return (
         <div className="flex flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-4">
@@ -72,6 +82,7 @@ const Login = () => {
                 className="font-bold text-md bg-[#252B42] text-white rounded-md w-full h-12"
                 type="submit"
                 disabled={!isValid}
+                
               >
                 Login
               </button>
